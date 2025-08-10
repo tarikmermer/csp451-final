@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  backend:
+    image: smartretail-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - AZURE_STORAGE_CONNECTION_STRING=${AZURE_STORAGE_CONNECTION_STRING}
+      - STOCK_THRESHOLD=10
+    depends_on:
+      - supplier-api
+
+  supplier-api:
+    image: smartretail-supplier-api
+    ports:
+      - "8001:8001"
+    environment:
+      - SUPPLIER_ID=ACME-SUPPLIER-001

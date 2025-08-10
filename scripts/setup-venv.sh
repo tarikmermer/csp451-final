@@ -8,5 +8,5 @@ python3 -m venv "$VENV_DIR"
 # Activate virtual environment
 source "$VENV_DIR/bin/activate"
 # Upgrade pip
-pip install --upgrade pip
+ pip install --upgrade pip
 echo " Virtual environment setup complete!"
