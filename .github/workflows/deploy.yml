@@ -24,10 +24,14 @@ jobs:
           docker build -t smartretail-supplier-api ./supplier-api
 
       - name: Copy files to VM
-        run: |
-          rsync -avz --exclude='.git' --exclude='venv' --exclude='__pycache__' ./ ${{ secrets.VM_USER }}@${{ secrets.VM_HOST }}:/home/${{ secrets.VM_USER }}/csp451-final/
-        env:
-          RSYNC_RSH: "ssh -p 22"
+  env:
+    VM_USER: ${{ secrets.VM_USER }}
+    VM_HOST: ${{ secrets.VM_HOST }}
+  run: |
+    rsync -avz --exclude='.git' --exclude='venv' --exclude='__pycache__' ./ $VM_USER@$VM_HOST:/home/$VM_USER/csp451-final/
+  env:
+    RSYNC_RSH: "ssh -p 22"
+
 
       - name: Deploy Docker containers on VM
         uses: appleboy/ssh-action@v0.1.6
