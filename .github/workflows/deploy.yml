@@ -22,6 +22,14 @@ jobs:
         run: |
           docker build -t smartretail-backend ./backend
           docker build -t smartretail-supplier-api ./supplier-api
+      - name: Debug SSH and env variables
+        env:
+          VM_USER: ${{ secrets.VM_USER }}
+          VM_HOST: ${{ secrets.VM_HOST }}
+        run: |
+          echo "VM_USER=$VM_USER"
+          echo "VM_HOST=$VM_HOST"
+          ssh -o StrictHostKeyChecking=no $VM_USER@$VM_HOST "hostname && whoami"
 
       - name: Copy files to VM
         env:
